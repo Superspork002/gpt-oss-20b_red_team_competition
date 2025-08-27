@@ -375,6 +375,18 @@ def build_conversation(
 def _make_key(prompt_id, seed, attempt_idx, batch_label):
 	return f"{batch_label}::{prompt_id}::{seed}::{attempt_idx}"
 
+
+# --------------------------------------
+# WARNING — DO NOT STORE RAW MODEL OUTPUTS BY DEFAULT
+# The fields below contain raw model content which may include executable code,
+# jailbreak payloads, or offensive material. Persisting them to disk could
+# inadvertently save malicious scripts or harmful content to your machine.
+# Un-comment ONLY if you explicitly accept the risks for a tightly controlled,
+# air-gapped analysis step, and you understand the implications.
+# "final_text": final_text,			# DANGEROUS: raw model output
+# "analysis_text": analysis,			# DANGEROUS: potential sensitive/CoT
+# --------------------------------------
+
 def run_experiment(
 	*, batch_label: str, prompts: list, seeds: List[int],
 	spa_sys: str, spa_dev: str, include_system: Optional[bool] = None, use_dev: bool = False,
@@ -468,8 +480,8 @@ def run_experiment(
 					"final_len_words": word_count(final_text),
 					"analysis_len_chars": len(analysis or ""),
 					"analysis_len_words": word_count(analysis),
-					"final_text": final_text,
-					"analysis_text": analysis,
+					#"final_text": final_text,
+					#"analysis_text": analysis,
 					"conversation_hash": conv_hash(wire_msgs),
 					"run_id": str(uuid.uuid4()),
 				}
@@ -1063,3 +1075,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
