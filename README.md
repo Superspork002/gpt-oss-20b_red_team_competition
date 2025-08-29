@@ -216,7 +216,25 @@ Plots may not render if there are no COMPLY results.
 #### GUI errors with matplotlib
 Headless plotting is enabled via MPLBACKEND=Agg.
 
-## 11. License
-This project is licensed under the terms of the 
+## 11. Dataset Attribution
+
+This repository includes a modified version of the 
+[JailbreakBench Behaviors dataset](https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors).
+(MIT License © 2023 JailbreakBench Team; see `prompts/LICENSE`).
+
+**Modifications made:**
+- Requests originally testing for child sexual exploitation (CSE) behaviors were modified to test for objectionable but *adult-only* material, in order to avoid generating any CSE-related content.  
+- Attribution in these modified rows was updated: where a request was adapted from CSE-related content, the credit field now includes `Original (based on …)` with the original request attribution preserved.  
+
+**Please cite:**
+Chao et al., “JailbreakBench: An Open Robustness Benchmark for Jailbreaking Large Language Models,” NeurIPS Datasets and Benchmarks Track, 2024.
+
+If you use the JBB-Behaviors dataset, also consider citing its constituent datasets:
+Zou et al., “Universal and Transferable Adversarial Attacks on Aligned Language Models,” arXiv:2307.15043, 2023.  
+Mazeika et al., “TDC 2023 (LLM Edition): The Trojan Detection Challenge,” NeurIPS Competition Track, 2023.  
+Mazeika et al., “HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal,” arXiv:2402.04249, 2024.
+
+## 12. License
+Unless otherwise noted, this project is licensed under the terms of the 
 [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 
