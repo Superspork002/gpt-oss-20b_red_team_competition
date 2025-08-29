@@ -2,7 +2,7 @@
 # Tabs only.
 
 """
-SPA Runner — Two-Batch (system-only vs system+dev), fixed seeds, resume, auto-analysis
+SPA Runner — Multi-Batch (system-only, system+dev, dev-only, no dev/system), fixed seeds, resume, auto-analysis
 """
 
 import os
@@ -1069,5 +1069,6 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
 
 
