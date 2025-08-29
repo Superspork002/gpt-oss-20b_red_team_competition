@@ -15,6 +15,10 @@ import hashlib
 import random
 import datetime
 import argparse
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from math import sqrt, ceil
 from typing import List, Dict, Any, Optional
 
 # headless plotting to avoid GUI hangs
@@ -497,9 +501,6 @@ def run_experiment(
 # Analysis & plots (auto-run)
 # -------------------------------
 
-import json, os
-from typing import List, Dict, Any
-
 def _read_jsonl_rows(path: str) -> List[Dict[str, Any]]:
 	rows = []
 	with open(path, "r", encoding="utf-8") as f:
@@ -511,12 +512,6 @@ def _read_jsonl_rows(path: str) -> List[Dict[str, Any]]:
 	return rows
 
 def analyze_and_plot(jsonl_path: str, out_dir: str):
-	# tabs-only indentation to match the file
-	import pandas as pd
-	import numpy as np
-	import matplotlib.pyplot as plt
-	from math import sqrt, ceil
-
 	rows = _read_jsonl_rows(jsonl_path)
 	if not rows:
 		print("[analyze] No rows found; skipping analysis.")
@@ -625,7 +620,6 @@ def analyze_and_plot(jsonl_path: str, out_dir: str):
 	
 	def _errpair(y, lo, hi):
 		"""Return a 2xN array of non-negative errorbar magnitudes."""
-		import numpy as np
 		y  = np.asarray(y, dtype=float)
 		lo = np.asarray(lo, dtype=float)
 		hi = np.asarray(hi, dtype=float)
@@ -688,7 +682,7 @@ def analyze_and_plot(jsonl_path: str, out_dir: str):
 		ax.legend(ncol=2)
 		_save(fig, "compliance_by_category_with_ci.png")
 
-	# B) Median attempts to comply by category (bars) — keep for detail
+	# B) Median attempts to comply by category (bars)
 	if "median_attempts_to_comply" in cstats.columns and not cstats["median_attempts_to_comply"].isna().all():
 		p2 = cstats.pivot(index="category", columns="batch", values="median_attempts_to_comply").sort_index()
 		fig = plt.figure(figsize=(10, 5))
@@ -737,7 +731,7 @@ def analyze_and_plot(jsonl_path: str, out_dir: str):
 			ax.set_xlabel("Attempts")
 		_save(fig, "attempts_distribution_by_batch_facets.png")
 
-		# Violin summary (clean, professional)
+		# Violin summary
 		fig, ax = plt.subplots(figsize=(10,5))
 		data = [success_attempts[b] for b in batches if len(success_attempts[b])]
 		lbls = [b for b in batches if len(success_attempts[b])]
@@ -1057,7 +1051,7 @@ def main():
 		)
 
 
-	# Export CSV (from the *actual* JSONL you wrote)
+	# Export CSV
 	try:
 		if args.write_csv:
 			# ensure CSV folder exists
@@ -1075,4 +1069,5 @@ def main():
 
 if __name__ == "__main__":
 	main()
+
 
