@@ -217,5 +217,6 @@ Plots may not render if there are no COMPLY results.
 Headless plotting is enabled via MPLBACKEND=Agg.
 
 ## 11. License
-For internal red-team research only.
-You are responsible for safe handling of outputs and compliance with policies.
+This project is licensed under the terms of the 
+[Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
