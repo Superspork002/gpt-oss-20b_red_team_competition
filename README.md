@@ -75,7 +75,7 @@ Run all test arms on a CSV dataset:
 ```
 python spa_runner.py \
   --suite negative \
-  --prompts JailBreakBench_Harmful.csv \
+  --prompts prompts/JailBreakBench_Harmful.csv \
   --tests all
 ```
 
